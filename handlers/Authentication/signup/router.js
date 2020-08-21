@@ -1,5 +1,4 @@
-import { getToken, authenticateToken } from './domain'
-
+import { getToken } from './domain'
 export default function (app) {
     app.post('/signup', function (req, res) {
         const { email, password } = req.body

@@ -1,8 +1,8 @@
 import jwt from 'jsonwebtoken'
-// todo : taking key from the ENV
+import config from '../../../config'
 function getToken(email) {
     const userEmail = { email: email }
-    return jwt.sign(userEmail, 'Yogesh')
+    return jwt.sign(userEmail, config.ACCESS_TOKEN_SECRETE)
 }
 
 export { getToken }
