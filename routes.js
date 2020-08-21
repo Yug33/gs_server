@@ -1,5 +1,4 @@
+import login from './handlers/Authendication/login/router'
 module.exports = function (app) {
-    app.get('/login', function (req, res) {
-        res.send('done')
-    })
+    login(app)
 }
