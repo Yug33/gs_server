@@ -1,9 +1,6 @@
-const express = require('express')
-const app = express()
-const port = 3000
-
-require('./routes')(app);
-
-app.listen(port, () => {
-  console.log(`Server is listening at http://localhost:${port}`)
+require('@babel/register')({
+    presets: ['@babel/preset-env'],
 })
+
+// Import the rest of our application.
+module.exports = require('./server.js')
