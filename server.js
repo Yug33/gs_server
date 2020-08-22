@@ -1,5 +1,6 @@
 // const express = require('express')
 import express from 'express'
+import regeneratorRuntime from 'regenerator-runtime'
 const app = express()
 const port = 3000
 
