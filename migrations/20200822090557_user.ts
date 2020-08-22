@@ -35,8 +35,8 @@ exports.up = function (knex) {
 
 exports.down = function (knex) {
     const query = `
-    DROP TABLE business.business;
-    DROP SCHEMA business;
+    DROP TABLE users.users;
+    DROP SCHEMA users;
     `
     return knex.schema.raw(query)
 }
