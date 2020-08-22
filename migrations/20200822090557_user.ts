@@ -9,7 +9,7 @@ exports.up = function (knex) {
         "createdAt" timestamptz DEFAULT now(),
         "updatedAt" timestamptz DEFAULT now(),
         id serial PRIMARY KEY,
-        email TEXT,
+        email TEXT UNIQUE,
         password TEXT,
         first_name TEXT,
         last_name TEXT
