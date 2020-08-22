@@ -1,9 +1,8 @@
-import { getToken } from '../../util'
 import { saveUsers } from './repo'
+import { processUserData } from './domain'
 async function signup(req, res) {
-    const { email, password } = req.body
-    await saveUsers(req.body)
-    const accessToken = getToken(email)
-    res.json({ accessToken })
+    const userData = await processUserData(req.body)
+    await saveUsers(userData)
+    res.json({ login: 'done' })
 }
 export { signup }
