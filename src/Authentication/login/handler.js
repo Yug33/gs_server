@@ -1,7 +1,7 @@
-import { getToken } from '../../../util'
-function signup(req, res) {
+import { getToken } from '../../util'
+function login(req, res) {
     const { email, password } = req.body
     const accessToken = getToken(email)
     res.json({ accessToken })
 }
-export { signup }
+export { login }
