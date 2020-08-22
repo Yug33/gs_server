@@ -9,8 +9,8 @@ exports.up = function (knex) {
         "createdAt" timestamptz DEFAULT now(),
         "updatedAt" timestamptz DEFAULT now(),
         id serial PRIMARY KEY,
-        name TEXT,
-        country TEXT
+        email TEXT,
+        password TEXT
     );
     
     CREATE OR REPLACE FUNCTION update_updated_at()
