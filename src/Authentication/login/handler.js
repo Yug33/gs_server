@@ -14,9 +14,14 @@ async function login(req, res) {
         }
 
         const isUserAuth = await verifyUser(req.body.password, user.password)
-        if (isUserAuth) {
+        if (!user.is_mail_verified) {
+            res.status(401).send({
+                code: 'LOGIN_FAILED',
+                message: 'Email is not verified',
+            })
+        } else if (isUserAuth) {
             const { email } = req.body
-            const accessToken = getToken(email)
+            const accessToken = getToken(email, user.id)
             res.json({ accessToken })
         } else {
             res.status(401).send({

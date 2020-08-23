@@ -12,7 +12,8 @@ exports.up = function (knex) {
         email TEXT UNIQUE,
         password TEXT,
         first_name TEXT,
-        last_name TEXT
+        last_name TEXT,
+        is_mail_verified boolean DEFAULT false
     );
     
     CREATE OR REPLACE FUNCTION update_updated_at()
