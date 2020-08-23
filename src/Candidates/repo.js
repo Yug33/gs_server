@@ -1,9 +1,16 @@
 import db from '../db'
 
-const usersTableName = 'candidates.candidates'
+const candidateTableName = 'candidates.candidates'
 
 const getCandidates = async (trx = db) => {
-    const candidates = await trx(usersTableName).select('*')
+    const candidates = await trx(candidateTableName).select('*')
     return candidates
 }
-export { getCandidates }
+
+const addCandidates = async (candidate, trx = db) => {
+    const usersId = await trx(candidateTableName)
+        .insert({ ...candidate })
+        .returning('id')
+    return usersId
+}
+export { getCandidates, addCandidates }
