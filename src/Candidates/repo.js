@@ -40,7 +40,6 @@ const addCandidates = async (candidate, trx = db) => {
     ));
     `
         const result = await trx.schema.raw(query)
-        debugger
     } catch (error) {
         console.log(error)
     }

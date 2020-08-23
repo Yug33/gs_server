@@ -26,7 +26,7 @@ async function storeCandidates(req, res) {
             })
         } else {
             res.status(400).json({
-                code: 'REQUEST_FAILED',
+                code: 'EMAIL_USED',
                 message: 'Error in request',
             })
         }
