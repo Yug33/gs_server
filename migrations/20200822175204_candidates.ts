@@ -14,8 +14,9 @@ exports.up = function (knex) {
         email TEXT UNIQUE,
         web_address TEXT,
         cover_letter TEXT,
-        attachment TEXT,
-        do_you_like_working boolean
+        resume TEXT,
+        do_you_like_working boolean,
+        vector tsvector NOT NULL
     );
         
     CREATE TRIGGER candidates_updated
