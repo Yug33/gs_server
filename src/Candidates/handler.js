@@ -6,7 +6,6 @@ import {
     getCandidateByVector,
 } from './repo'
 import { uploadFile } from '../util'
-// import { uploadFile, getFileFromRequest } from '../util'
 async function fetchCandidates(req, res) {
     const { limit, offset } = req.query
     const candidates = await getCandidates(limit, offset)

@@ -46,21 +46,4 @@ async function uploadFile(file, email, type) {
     }
 }
 
-// async function uploadFile(file) {
-//     cloudinary.config({
-//         cloud_name: 'dvoemnfto',
-//         api_key: '814262874231755',
-//         api_secret: 'hIkyWIi9xoqX0Tneb76fDMyx7_M',
-//     })
-
-//     try {
-//         cloudinary.uploader
-//             .upload(file, { flag: 'attachment' })
-//             .then((result) => {
-//                 const image = result.url
-//             })
-//     } catch (e) {
-//         console.log(e)
-//     }
-// }
 export { getToken, verifyToken, uploadFile }
