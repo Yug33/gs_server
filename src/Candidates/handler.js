@@ -17,7 +17,6 @@ async function fetchCandidates(req, res) {
 async function fetchCandidateByVector(req, res) {
     const { query } = req.query
     const candidates = await getCandidateByVector(query)
-    debugger
     res.json(candidates)
 }
 async function fetchCandidatesCount(req, res) {

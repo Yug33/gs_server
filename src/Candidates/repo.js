@@ -16,7 +16,7 @@ const getCandidateByEmail = async (email, trx = db) => {
 }
 const getCandidateByVector = async (searchValue, trx = db) => {
     const query = `SELECT * FROM ${candidateTableName} WHERE vector @@ to_tsquery('${searchValue}')`
-    debugger
+
     const results = await trx.schema.raw(query)
     return results.rows
 }
