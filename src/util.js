@@ -5,8 +5,8 @@ import path from 'path'
 
 const AWS = require('aws-sdk')
 function getToken(email, userId) {
-    const userEmail = { email, userId }
-    return jwt.sign(userEmail, config.ACCESS_TOKEN_SECRETE)
+    const userData = { email, userId }
+    return jwt.sign(userData, config.ACCESS_TOKEN_SECRETE)
 }
 function verifyToken(token) {
     return jwt.verify(token, config.ACCESS_TOKEN_SECRETE)
@@ -26,7 +26,6 @@ async function uploadFile(file, email, type) {
         region: 'ap-south-1',
     })
     const fileName = `${file.md5}${email}${type}${path.extname(file.name)}`
-    debugger
     try {
         return new Promise((resolve, reject) => {
             return s3.upload(

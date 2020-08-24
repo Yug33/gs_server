@@ -22,7 +22,7 @@ async function login(req, res) {
         } else if (isUserAuth) {
             const { email } = req.body
             const accessToken = getToken(email, user.id)
-            res.json({ accessToken })
+            res.json({ accessToken, userId: user.id })
         } else {
             res.status(401).send({
                 code: 'LOGIN_FAILED',

@@ -44,7 +44,6 @@ async function storeCandidates(req, res) {
                 cover_letter: coverLetterLocation.Location,
                 resume: resumeLocation.Location,
             }
-            debugger
             await addCandidates(candidate)
             return res.json({
                 code: 'SUBMITTED_SUCCESSFUL',
