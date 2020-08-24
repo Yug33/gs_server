@@ -2,6 +2,7 @@ var cloudinary = require('cloudinary')
 import jwt from 'jsonwebtoken'
 import config from '../config'
 import path from 'path'
+
 const AWS = require('aws-sdk')
 function getToken(email, userId) {
     const userEmail = { email, userId }
@@ -45,5 +46,22 @@ async function uploadFile(file, email, type) {
         console.log(e)
     }
 }
+function authenticateToken(req, res, next) {
+    const { authorization } = req.headers
+    const token = authorization && authorization.split('.')[1]
+    if (!token) {
+        res.sendStatus(401)
+    } else {
+        try {
+            if (verifyToken(authorization)) {
+                next()
+            } else {
+                res.sendStatus(403)
+            }
+        } catch {
+            res.sendStatus(403)
+        }
+    }
+}
 
-export { getToken, verifyToken, uploadFile }
+export { getToken, verifyToken, uploadFile, authenticateToken }
