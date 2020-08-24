@@ -29,4 +29,10 @@ exports.up = function (knex) {
     return knex.schema.raw(query)
 }
 
-exports.down = function (knex) {}
+exports.down = function (knex) {
+    const query = `
+    DROP TABLE candidates.candidates;
+    DROP SCHEMA candidates;
+    `
+    return knex.schema.raw(query)
+}
