@@ -14,10 +14,11 @@ const getCandidateByEmail = async (email, trx = db) => {
     if (user && user.length) return user[0]
     return null
 }
-const getCandidateByVector = async (email, trx = db) => {
-    const user = await trx(candidateTableName).select('*').where({ email })
-    if (user && user.length) return user[0]
-    return null
+const getCandidateByVector = async (searchValue, trx = db) => {
+    const query = `SELECT * FROM ${candidateTableName} WHERE vector @@ to_tsquery('${searchValue}')`
+    debugger
+    const results = await trx.schema.raw(query)
+    return results.rows
 }
 const getCandidatesCount = async (trx = db) => {
     const count = await trx(candidateTableName).count()
@@ -51,7 +52,7 @@ const addCandidates = async (candidate, trx = db) => {
      to_tsvector('${web_address}')
     ));
     `
-        const result = await trx.schema.raw(query)
+        return await trx.schema.raw(query)
     } catch (error) {
         console.log(error)
     }

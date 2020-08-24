@@ -6,11 +6,18 @@ import {
     addCandidates,
     getCandidateByEmail,
     getCandidatesCount,
+    getCandidateByVector,
 } from './repo'
 // import { uploadFile, getFileFromRequest } from '../util'
 async function fetchCandidates(req, res) {
     const { limit, offset } = req.query
     const candidates = await getCandidates(limit, offset)
+    res.json(candidates)
+}
+async function fetchCandidateByVector(req, res) {
+    const { query } = req.query
+    const candidates = await getCandidateByVector(query)
+    debugger
     res.json(candidates)
 }
 async function fetchCandidatesCount(req, res) {
@@ -48,5 +55,5 @@ export {
     fetchCandidates,
     storeCandidates,
     fetchCandidatesCount,
-    getCandidateByVector,
+    fetchCandidateByVector,
 }
