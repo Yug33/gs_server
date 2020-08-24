@@ -1,6 +1,3 @@
-const DatauriParser = require('datauri/parser')
-const parser = new DatauriParser()
-import fs from 'fs'
 import {
     getCandidates,
     addCandidates,
@@ -8,6 +5,7 @@ import {
     getCandidatesCount,
     getCandidateByVector,
 } from './repo'
+import { uploadFile } from '../util'
 // import { uploadFile, getFileFromRequest } from '../util'
 async function fetchCandidates(req, res) {
     const { limit, offset } = req.query
@@ -26,15 +24,28 @@ async function fetchCandidatesCount(req, res) {
 async function storeCandidates(req, res) {
     try {
         const { form } = req.body
+        const { resume, cover_letter } = req.files
         const submittedInfo = JSON.parse(form)
         //TODO file upload5
-        const candidate = {
-            ...submittedInfo,
-            cover_letter: 'abx',
-            resume: 'pow',
-        }
+
         const isCandidate = await getCandidateByEmail(submittedInfo.email)
         if (!isCandidate) {
+            const resumeLocation = await uploadFile(
+                resume,
+                form.email,
+                'resume'
+            )
+            const coverLetterLocation = await uploadFile(
+                cover_letter,
+                form.email,
+                'cover_letter'
+            )
+            const candidate = {
+                ...submittedInfo,
+                cover_letter: coverLetterLocation.Location,
+                resume: resumeLocation.Location,
+            }
+            debugger
             await addCandidates(candidate)
             return res.json({
                 code: 'SUBMITTED_SUCCESSFUL',
