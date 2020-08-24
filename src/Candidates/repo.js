@@ -2,14 +2,26 @@ import db from '../db'
 
 const candidateTableName = 'candidates.candidates'
 
-const getCandidates = async (trx = db) => {
-    const candidates = await trx(candidateTableName).select('*')
+const getCandidates = async (limit, offset, trx = db) => {
+    const candidates = await trx(candidateTableName)
+        .select('*')
+        .limit(limit)
+        .offset(offset)
     return candidates
 }
 const getCandidateByEmail = async (email, trx = db) => {
     const user = await trx(candidateTableName).select('*').where({ email })
     if (user && user.length) return user[0]
     return null
+}
+const getCandidateByVector = async (email, trx = db) => {
+    const user = await trx(candidateTableName).select('*').where({ email })
+    if (user && user.length) return user[0]
+    return null
+}
+const getCandidatesCount = async (trx = db) => {
+    const count = await trx(candidateTableName).count()
+    return count[0]
 }
 const addCandidates = async (candidate, trx = db) => {
     try {
@@ -44,4 +56,11 @@ const addCandidates = async (candidate, trx = db) => {
         console.log(error)
     }
 }
-export { getCandidates, addCandidates, getCandidateByEmail }
+
+export {
+    getCandidates,
+    addCandidates,
+    getCandidateByEmail,
+    getCandidatesCount,
+    getCandidateByVector,
+}
