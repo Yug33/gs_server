@@ -64,12 +64,12 @@ async function storeCandidates(req, res) {
 async function fetchMyRatedCandidates(req, res) {
     const { reviewerId } = req.query
     const candidates = await getMyRatedCandidates(reviewerId)
-    console.log(candidates.rows)
+
     res.json(candidates.rows)
 }
 async function fetchFiveStarCandidates(req, res) {
     const candidates = await getFiveStarCandidates()
-    console.log(candidates.rows)
+
     res.json(candidates.rows)
 }
 

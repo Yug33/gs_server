@@ -22,7 +22,6 @@ async function verifyMail(req, res) {
     const { accessToken } = req.body
     try {
         const data = verifyToken(accessToken)
-        console.log(data)
         if (data) {
             await saveEmailVerification(data.userId)
             res.json({
