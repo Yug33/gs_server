@@ -4,6 +4,7 @@ import {
     getCandidateByEmail,
     getCandidatesCount,
     getCandidateByVector,
+    getMyRatedCandidates,
 } from './repo'
 import { uploadFile } from '../util'
 async function fetchCandidates(req, res) {
@@ -59,9 +60,16 @@ async function storeCandidates(req, res) {
         console.error(error)
     }
 }
+async function fetchMyRatedCandidates(req, res) {
+    const { reviewerId } = req.query
+    const candidates = await getMyRatedCandidates(reviewerId)
+    console.log(candidates.rows)
+    res.json(candidates.rows)
+}
 export {
     fetchCandidates,
     storeCandidates,
     fetchCandidatesCount,
     fetchCandidateByVector,
+    fetchMyRatedCandidates,
 }

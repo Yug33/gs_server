@@ -1,7 +1,7 @@
 import db from '../db'
 
 const candidateTableName = 'candidates.candidates'
-
+const ratingsTableName = 'ratings.ratings'
 const getCandidates = async (limit, offset, trx = db) => {
     const candidates = await trx(candidateTableName)
         .select('*')
@@ -57,11 +57,19 @@ const addCandidates = async (candidate, trx = db) => {
         console.log(error)
     }
 }
-
+const getMyRatedCandidates = async (reviewerId, trx = db) => {
+    const query = `
+    select * from candidates.candidates as candidate 
+    inner join ratings.ratings as ratings 
+    on ratings.candidate_id = candidate.id 
+    where ratings.reviewer_id = ${reviewerId}`
+    return await trx.schema.raw(query)
+}
 export {
     getCandidates,
     addCandidates,
     getCandidateByEmail,
     getCandidatesCount,
     getCandidateByVector,
+    getMyRatedCandidates,
 }
