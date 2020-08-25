@@ -1,13 +1,14 @@
-import { getUserByEmail } from '../Authentication/repo'
+import config from '../../config'
 
 const nodemailer = require('nodemailer')
 //TOOD take creds from env
+
 var transport = nodemailer.createTransport({
-    host: 'smtp-relay.sendinblue.com',
+    host: config.SENDGRID_HOST,
     port: 587,
     auth: {
-        user: 'admantiumboy@gmail.com',
-        pass: 'QAVZd3hgDmITLrsp',
+        user: config.SENDGRID_USER,
+        pass: config.SENDGRID_PASS,
     },
 })
 function getEmailBody(email, url) {

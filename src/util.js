@@ -13,9 +13,9 @@ function verifyToken(token) {
 }
 
 async function uploadFile(file, email, type) {
-    const ID = 'AKIAJ3RIKEGSPV7OXKYQ'
-    const SECRET = '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'
-    const BUCKET_NAME = 'gsdata'
+    const ID = config.S3_ID
+    const SECRET = config.S3_SECRET
+    const BUCKET_NAME = config.BUCKET_NAME
 
     const s3 = new AWS.S3({
         params: {
