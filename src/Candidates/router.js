@@ -4,6 +4,7 @@ import {
     fetchCandidatesCount,
     fetchCandidateByVector,
     fetchMyRatedCandidates,
+    fetchFiveStarCandidates,
 } from './handler'
 import { authenticateToken } from '../util'
 export default function (app) {
@@ -21,5 +22,8 @@ export default function (app) {
     })
     app.get('/getMyRatedCandidates', function (req, res) {
         fetchMyRatedCandidates(req, res)
+    })
+    app.get('/getFiveStarCandidates', function (req, res) {
+        fetchFiveStarCandidates(req, res)
     })
 }

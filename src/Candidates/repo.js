@@ -65,6 +65,15 @@ const getMyRatedCandidates = async (reviewerId, trx = db) => {
     where ratings.reviewer_id = ${reviewerId}`
     return await trx.schema.raw(query)
 }
+const getFiveStarCandidates = async (trx = db) => {
+    const query = `
+    select * from candidates.candidates as candidate 
+    where candidate.id in 
+    (select distinct ratings.candidate_id 
+        from ratings.ratings 
+        where ratings = 5 )`
+    return await trx.schema.raw(query)
+}
 export {
     getCandidates,
     addCandidates,
@@ -72,4 +81,5 @@ export {
     getCandidatesCount,
     getCandidateByVector,
     getMyRatedCandidates,
+    getFiveStarCandidates,
 }
