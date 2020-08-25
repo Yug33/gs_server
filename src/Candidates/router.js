@@ -17,13 +17,13 @@ export default function (app) {
     app.get('/getCandidateByVector', authenticateToken, function (req, res) {
         fetchCandidateByVector(req, res)
     })
-    app.post('/addCandidates', function (req, res) {
+    app.post('/addCandidates', authenticateToken, function (req, res) {
         storeCandidates(req, res)
     })
-    app.get('/getMyRatedCandidates', function (req, res) {
+    app.get('/getMyRatedCandidates', authenticateToken, function (req, res) {
         fetchMyRatedCandidates(req, res)
     })
-    app.get('/getFiveStarCandidates', function (req, res) {
+    app.get('/getFiveStarCandidates', authenticateToken, function (req, res) {
         fetchFiveStarCandidates(req, res)
     })
 }
